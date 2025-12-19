@@ -1,0 +1,17 @@
+{
+  "extends": "@starter/tsconfig/library",
+  "compilerOptions": {
+    "baseUrl": "./src"
+  },
+  "exclude": [
+    "./dist",
+    "./build",
+    "./node_modules",
+    "./coverage",
+    "../**/.turbo",
+    "../**/.tanstack",
+    "../**/.vercel",
+    "../**/.vite",
+    "../**/.output"
+  ]
+}

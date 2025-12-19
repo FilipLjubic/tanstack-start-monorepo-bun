@@ -1,0 +1,6 @@
+{
+  "extends": "@starter/tsconfig/library",
+  "compilerOptions": {
+    "baseUrl": "./src"
+  }
+}

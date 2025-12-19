@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@starter/tsconfig/tanstack-start",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "allowImportingTsExtensions": true
+  },
+  "exclude": [
+    "../**/dist",
+    "../**/build",
+    "../**/node_modules",
+    "../**/.next",
+    "../**/.turbo",
+    "../**/.tanstack",
+    "../**/.vercel",
+    "../**/.vite",
+    "../**/.output",
+    "../**/coverage",
+    "./public",
+    "./examples",
+    "./src/paraglide"
+  ]
+}

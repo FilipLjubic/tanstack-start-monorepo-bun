@@ -1,0 +1,7 @@
+{
+  "extends": "@starter/tsconfig/react-library",
+  "compilerOptions": {
+    "baseUrl": "./src"
+  },
+  "include": ["./src"]
+}
