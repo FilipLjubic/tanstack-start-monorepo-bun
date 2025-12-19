@@ -23,6 +23,8 @@ RUN bun install --frozen-lockfile
 # -----------------------------------------------------------
 FROM deps AS build
 
+ENV NODE_ENV=production
+
 COPY . .
 
 RUN bun --filter @starter/web build
@@ -30,7 +32,7 @@ RUN bun --filter @starter/web build
 # -----------------------------------------------------------
 # Production stage - minimal runtime image
 # -----------------------------------------------------------
-FROM oven/bun:1-distroless AS production
+FROM oven/bun:1-debian AS production
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
@@ -39,7 +41,9 @@ ENV PORT=3000
 WORKDIR /app
 
 COPY --from=build /app/apps/web/.output ./apps/web/.output
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/package.json ./
 
 EXPOSE 3000
 
-CMD ["bun", "run", "./apps/web/.output/server/index.mjs"]
+CMD ["bun", "./apps/web/.output/server/index.mjs"]
