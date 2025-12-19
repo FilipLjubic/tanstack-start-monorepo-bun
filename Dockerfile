@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 
-FROM oven/bun:1 AS base
+FROM oven/bun:1-debian AS base
+RUN apt-get update && apt-get install -y python3 build-essential && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # -----------------------------------------------------------
@@ -29,16 +30,16 @@ RUN bun --filter @starter/web build
 # -----------------------------------------------------------
 # Production stage - minimal runtime image
 # -----------------------------------------------------------
-FROM base AS production
+FROM oven/bun:1-distroless AS production
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
 
+WORKDIR /app
+
 COPY --from=build /app/apps/web/.output ./apps/web/.output
-COPY --from=build /app/apps/web/package.json ./apps/web/
-COPY --from=build /app/package.json ./
 
 EXPOSE 3000
 
-CMD ["bun", "run", "--filter", "@starter/web", "start"]
+CMD ["bun", "run", "./apps/web/.output/server/index.mjs"]
