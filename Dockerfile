@@ -15,8 +15,7 @@ COPY --link packages/logger/package.json ./packages/logger/
 COPY --link packages/ui/package.json ./packages/ui/
 COPY --link packages/tsconfig/package.json ./packages/tsconfig/
 
-RUN --mount=type=cache,id=s/bun-cache,target=/root/.bun/install/cache \
-    bun install --frozen-lockfile
+RUN bun install --frozen-lockfile
 
 # -----------------------------------------------------------
 # Build stage - copy source and build the app
@@ -41,8 +40,7 @@ COPY --link packages/logger/package.json ./packages/logger/
 COPY --link packages/ui/package.json ./packages/ui/
 COPY --link packages/tsconfig/package.json ./packages/tsconfig/
 
-RUN --mount=type=cache,id=s/bun-cache,target=/root/.bun/install/cache \
-    bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile --production
 
 # -----------------------------------------------------------
 # Production stage - minimal runtime image
