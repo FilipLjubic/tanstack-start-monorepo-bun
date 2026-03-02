@@ -30,7 +30,7 @@ packages/
 ### Prerequisites
 
 - Node.js 22+
-- pnpm 10+
+- Bun 1.2+
 - Docker (for local Supabase)
 
 ### Setup
@@ -43,7 +43,7 @@ cd tanstack-start-monorepo
 
 2. Install dependencies:
 ```bash
-pnpm install
+bun install
 ```
 
 3. Copy environment file:
@@ -55,19 +55,19 @@ cp apps/web/env.example apps/web/.env
 
 4. Start local Supabase:
 ```bash
-pnpm --filter @starter/backend db:start
+bun --filter @starter/backend db:start
 ```
 
-> **Note**: To run Supabase CLI directly from root, use `pnpm supabase <command>` (e.g., `pnpm supabase status`). This ensures Supabase files stay in `packages/backend/supabase`.
+> **Note**: To run Supabase CLI directly from root, use `bun supabase <command>` (e.g., `bun supabase status`). This ensures Supabase files stay in `packages/backend/supabase`.
 
 5. Run database migrations:
 ```bash
-pnpm --filter @starter/backend db:push
+bun --filter @starter/backend db:push
 ```
 
 6. Start the development server:
 ```bash
-pnpm --filter @starter/web dev
+bun --filter @starter/web dev
 ```
 
 Visit http://localhost:3000
@@ -87,19 +87,19 @@ Visit http://localhost:3000
 
 ```bash
 # Development
-pnpm --filter @starter/web dev        # Start web dev server
-pnpm --filter @starter/backend db:start   # Start local Supabase
+bun --filter @starter/web dev              # Start web dev server
+bun --filter @starter/backend db:start     # Start local Supabase
 
 # Database
-pnpm --filter @starter/backend db:generate  # Generate migrations
-pnpm --filter @starter/backend db:push      # Push schema changes
-pnpm --filter @starter/backend db:studio    # Open Drizzle Studio
-pnpm --filter @starter/backend db:seed      # Seed database with test data
-pnpm --filter @starter/backend db:reset     # Reset DB, run migrations, and seed
+bun --filter @starter/backend db:generate  # Generate migrations
+bun --filter @starter/backend db:push      # Push schema changes
+bun --filter @starter/backend db:studio    # Open Drizzle Studio
+bun --filter @starter/backend db:seed      # Seed database with test data
+bun --filter @starter/backend db:reset     # Reset DB, run migrations, and seed
 
 # Code Quality
-pnpm biome check --write .              # Lint and format
-pnpm --filter @starter/web typecheck    # Type check
+bunx biome check --write .                 # Lint and format
+bun --filter @starter/web typecheck        # Type check
 ```
 
 ### Database Schema
@@ -120,9 +120,9 @@ grep -r "DELETE" --include="*.ts" --include="*.tsx" apps packages
 ```
 
 After deleting example code:
-1. Run `pnpm --filter @starter/backend db:push` to sync schema
-2. Run `pnpm biome check --write .` to clean up unused imports
-3. Run `pnpm --filter @starter/web typecheck` to verify no broken references
+1. Run `bun --filter @starter/backend db:push` to sync schema
+2. Run `bunx biome check --write .` to clean up unused imports
+3. Run `bun --filter @starter/web typecheck` to verify no broken references
 
 ## Railway Deployment
 
@@ -151,7 +151,7 @@ You'll need a PostgreSQL database:
    ```bash
    cp packages/backend/.env packages/backend/.env.prod
    # Edit .env.prod with your production DATABASE_URL
-   pnpm --filter @starter/backend db:migrate:prod
+   bun --filter @starter/backend db:migrate:prod
    ```
 
 2. **Configure Google OAuth** (optional):
@@ -183,7 +183,7 @@ You'll need a PostgreSQL database:
 | Database | PostgreSQL + Drizzle ORM |
 | Styling | Tailwind CSS v4 + shadcn/ui |
 | Build | Vite + Nitro |
-| Package Manager | pnpm |
+| Package Manager | Bun |
 | Linting | Biome |
 
 ## License

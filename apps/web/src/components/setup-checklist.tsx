@@ -240,16 +240,16 @@ const LocalSetupChecklist = ({ status }: { status: SetupStatus }) => {
             {!status.database.connected ? (
               <>
                 <p className="text-muted-foreground">
-                  Start local Supabase (requires Docker):
+                  Start local Supabase, run migrations, and seed (requires Docker):
                 </p>
-                <Code>pnpm --filter @starter/backend db:start</Code>
+                <Code>bun supabase start && bun --filter @starter/backend db:reset</Code>
               </>
             ) : (
               <>
                 <p className="text-muted-foreground">
                   Database connected. Run migrations and seed:
                 </p>
-                <Code>pnpm --filter @starter/backend db:reset</Code>
+                <Code>bun --filter @starter/backend db:reset</Code>
               </>
             )}
           </div>
@@ -375,7 +375,7 @@ const ProductionSetupChecklist = ({ status }: { status: SetupStatus }) => {
                   # Create packages/backend/.env.prod with production
                   DATABASE_URL
                   <br />
-                  pnpm --filter @starter/backend db:migrate:prod
+                  bun --filter @starter/backend db:migrate:prod
                 </Code>
               </>
             )}
