@@ -25,7 +25,8 @@
   "devDependencies": {
     "@starter/tsconfig": "workspace:*",
     "@types/node": "catalog:",
-    "drizzle-kit": "catalog:"
+    "drizzle-kit": "catalog:",
+    "typescript": "catalog:"
   },
   "dependencies": {
     "@starter/logger": "workspace:*",

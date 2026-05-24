@@ -159,6 +159,6 @@ const ResponsiveTooltipContent = ({
 
 export {
   ResponsiveTooltip,
-  ResponsiveTooltipTrigger,
   ResponsiveTooltipContent,
+  ResponsiveTooltipTrigger,
 };

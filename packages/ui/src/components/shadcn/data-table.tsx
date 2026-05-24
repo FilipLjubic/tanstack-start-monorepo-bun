@@ -88,5 +88,5 @@ const DataTable = <TData,>({
   );
 };
 
-export { DataTable };
 export type { DataTableColumnDef };
+export { DataTable };
