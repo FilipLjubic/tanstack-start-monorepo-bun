@@ -6,13 +6,10 @@
     "target": "es2022",
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["node"],
-
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-
     "noUncheckedIndexedAccess": true,
-
     "strict": true,
     "jsx": "react-jsx",
     "isolatedModules": true,
@@ -20,6 +17,7 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "rootDir": "../../.."
   }
 }

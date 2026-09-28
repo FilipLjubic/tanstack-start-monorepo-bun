@@ -1,8 +1,5 @@
 {
   "extends": "@starter/tsconfig/library",
-  "compilerOptions": {
-    "baseUrl": "./src"
-  },
   "exclude": [
     "./dist",
     "./build",

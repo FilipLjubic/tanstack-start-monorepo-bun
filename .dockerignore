@@ -5,7 +5,10 @@ node_modules
 *.md
 !README.md
 .env*
+**/.env*
 .output
+**/.output
+**/*.tsbuildinfo
 .vinxi
 dist
 .DS_Store

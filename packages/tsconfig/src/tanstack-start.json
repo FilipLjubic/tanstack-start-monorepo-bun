@@ -8,6 +8,8 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
     "allowJs": true,
-    "noEmit": true
+    "noEmit": true,
+    "rootDir": "../../..",
+    "types": ["node", "vite/client"]
   }
 }

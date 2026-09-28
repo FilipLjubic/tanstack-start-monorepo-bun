@@ -2,9 +2,8 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@starter/tsconfig/tanstack-start",
   "compilerOptions": {
-    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     },
     "allowImportingTsExtensions": true
   },

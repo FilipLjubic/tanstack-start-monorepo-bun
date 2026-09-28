@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "engines": {
-    "node": ">=22.18.0"
+    "node": ">=24.11.0"
   },
   "scripts": {
     "dev": "bunx vite dev",
-    "build": "bunx vite build",
+    "build": "NODE_ENV=production bunx vite build",
     "start": "bun .output/server/index.mjs",
     "typecheck": "bunx tsc"
   },
@@ -49,8 +49,6 @@
     "@rolldown/plugin-babel": "catalog:",
     "@starter/tsconfig": "workspace:*",
     "@tanstack/react-query-devtools": "catalog:",
-    "@tanstack/react-router-ssr-query": "catalog:",
-    "@types/babel__core": "catalog:",
     "@types/lodash-es": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",

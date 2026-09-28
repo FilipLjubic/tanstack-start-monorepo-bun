@@ -9,42 +9,37 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as PublicRouteImport } from './routes/_public'
 import { Route as ProtectedRouteImport } from './routes/_protected'
-import { Route as PublicIndexRouteImport } from './routes/_public/index'
-import { Route as AuthLoginRouteImport } from './routes/auth/login'
-import { Route as PublicTermsRouteImport } from './routes/_public/terms'
-import { Route as PublicPrivacyRouteImport } from './routes/_public/privacy'
+import { Route as PublicRouteImport } from './routes/_public'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ProtectedDashboardRouteImport } from './routes/_protected/dashboard'
+import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as PublicPrivacyRouteImport } from './routes/_public/privacy'
+import { Route as PublicTermsRouteImport } from './routes/_public/terms'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const ProtectedRoute = ProtectedRouteImport.update({
+  id: '/_protected',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProtectedRoute = ProtectedRouteImport.update({
-  id: '/_protected',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ProtectedDashboardRoute = ProtectedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ProtectedRoute,
 } as any)
 const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => PublicRoute,
-} as any)
-const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => AuthRoute,
-} as any)
-const PublicTermsRoute = PublicTermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
   getParentRoute: () => PublicRoute,
 } as any)
 const PublicPrivacyRoute = PublicPrivacyRouteImport.update({
@@ -52,10 +47,15 @@ const PublicPrivacyRoute = PublicPrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => PublicRoute,
 } as any)
-const ProtectedDashboardRoute = ProtectedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => ProtectedRoute,
+const PublicTermsRoute = PublicTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => PublicRoute,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -134,11 +134,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ProtectedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_public': {
@@ -148,32 +148,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_protected': {
-      id: '/_protected'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof ProtectedRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_protected/dashboard': {
+      id: '/_protected/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ProtectedDashboardRouteImport
+      parentRoute: typeof ProtectedRoute
     }
     '/_public/': {
       id: '/_public/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof PublicIndexRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/auth/login': {
-      id: '/auth/login'
-      path: '/login'
-      fullPath: '/auth/login'
-      preLoaderRoute: typeof AuthLoginRouteImport
-      parentRoute: typeof AuthRoute
-    }
-    '/_public/terms': {
-      id: '/_public/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof PublicTermsRouteImport
       parentRoute: typeof PublicRoute
     }
     '/_public/privacy': {
@@ -183,12 +176,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicPrivacyRouteImport
       parentRoute: typeof PublicRoute
     }
-    '/_protected/dashboard': {
-      id: '/_protected/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof ProtectedDashboardRouteImport
-      parentRoute: typeof ProtectedRoute
+    '/_public/terms': {
+      id: '/_public/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof PublicTermsRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'

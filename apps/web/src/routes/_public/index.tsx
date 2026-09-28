@@ -58,7 +58,7 @@ const LandingPage = () => {
             asChild
           >
             <a
-              href="https://github.com/FilipLjubic/tanstack-start-monorepo"
+              href="https://github.com/FilipLjubic/tanstack-monorepo-starter-bun"
               target="_blank"
               rel="noopener noreferrer"
             >

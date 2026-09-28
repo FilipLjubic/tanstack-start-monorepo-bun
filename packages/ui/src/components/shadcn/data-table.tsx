@@ -1,8 +1,9 @@
-import type { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef, RowData } from '@tanstack/react-table';
 import {
+  columnVisibilityFeature,
   flexRender,
-  getCoreRowModel,
-  useReactTable,
+  tableFeatures,
+  useTable,
 } from '@tanstack/react-table';
 import type { ReactNode } from 'react';
 
@@ -16,29 +17,35 @@ import {
   TableRow,
 } from './table';
 
-type DataTableColumnDef<TData> = ColumnDef<TData, unknown>;
+const features = tableFeatures({ columnVisibilityFeature });
 
-type DataTableProps<TData> = {
+type DataTableColumnDef<TData extends RowData> = ColumnDef<
+  typeof features,
+  TData,
+  unknown
+>;
+
+type DataTableProps<TData extends RowData> = {
   columns: DataTableColumnDef<TData>[];
   data: TData[];
   className?: string;
   emptyState?: ReactNode;
 };
 
-const DataTable = <TData,>({
+const DataTable = <TData extends RowData>({
   columns,
   data,
   className,
   emptyState,
 }: DataTableProps<TData>) => {
-  const table = useReactTable({
+  const table = useTable({
+    features,
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
   });
 
   return (
-    <div className={cn('space-y-2', className)}>
+    <div className={cn('flex flex-col gap-2', className)}>
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>

@@ -29,16 +29,16 @@ packages/
 
 ### Prerequisites
 
-- Node.js 22+
-- Bun 1.2+
+- Node.js 24.11+
+- Bun 1.4.2 (pinned in `package.json`)
 - Docker (for local Supabase)
 
 ### Setup
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/FilipLjubic/tanstack-start-monorepo.git
-cd tanstack-start-monorepo
+git clone https://github.com/FilipLjubic/tanstack-monorepo-starter-bun.git
+cd tanstack-monorepo-starter-bun
 ```
 
 2. Install dependencies:
@@ -98,8 +98,10 @@ bun --filter @starter/backend db:seed      # Seed database with test data
 bun --filter @starter/backend db:reset     # Reset DB, run migrations, and seed
 
 # Code Quality
-bunx biome check --write .                 # Lint and format
-bun --filter @starter/web typecheck        # Type check
+bun run lint                             # Check lint and formatting
+bun run lint:fix                         # Apply safe fixes
+bun run typecheck                        # Type check all packages
+bun run build                            # Build the web app
 ```
 
 ### Database Schema
@@ -185,6 +187,28 @@ You'll need a PostgreSQL database:
 | Build | Vite + Nitro |
 | Package Manager | Bun |
 | Linting | Biome |
+
+## Dependency Maintenance
+
+Production builds explicitly set `NODE_ENV=production`, even when a local `.env`
+file sets development mode.
+
+The dependency catalog pins the stack consistently across workspace packages. This
+refresh uses TypeScript 7, React 19.3, TanStack Table 9, DayPicker 10, and
+react-resizable-panels 4. The shared wrappers have been migrated with them:
+
+- Table columns can use the exported `DataTableColumnDef<TData>` type.
+- Resizable groups use `orientation`; percentage panel sizes use strings such as
+  `defaultSize="50%"`.
+- Calendar class names use `month_grid` in place of the removed `table` key.
+
+The `esbuild` override keeps Drizzle Kit's legacy loader on a patched release.
+Keep it until Drizzle Kit removes that transitive dependency. Nitro remains on
+its current v3 beta release channel.
+
+The test runner is configured, but the starter does not contain test specs yet.
+Use the lint, workspace typecheck, and production build commands above to verify
+changes; add application tests as you build your project.
 
 ## License
 
