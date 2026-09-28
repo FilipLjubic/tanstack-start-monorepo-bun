@@ -37,8 +37,8 @@ packages/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/FilipLjubic/tanstack-monorepo-starter-bun.git
-cd tanstack-monorepo-starter-bun
+git clone https://github.com/FilipLjubic/tanstack-start-monorepo-bun.git
+cd tanstack-start-monorepo-bun
 ```
 
 2. Install dependencies:
