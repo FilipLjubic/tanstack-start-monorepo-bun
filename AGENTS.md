@@ -1,7 +1,9 @@
 ## TanStack Start Monorepo
 
 ---
+
 ### Repository Layout (High Level)
+
 ```
 apps/
 	web/          Frontend (Vite + TanStack Start)
@@ -16,7 +18,8 @@ tests/            Vitest test specs
 ---
 
 # Instructions
+
 do minimal required changes, but still deliver goal
-do not put comments into the code, it should be self descriptive 
+Prefer self-explanatory code; use concise comments to explain non-obvious intent or constraints.
 do not use emojis
-be straightforward and sharp, sacrifice grammar if needed
+Write clearly and concisely.
